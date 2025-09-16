@@ -3,21 +3,71 @@ import wollok.game.*
 object personaje {
 	var property position = game.center()
 	const property image = "fplayer.png"
-	var ganancia = 0
+	const property modedas = oro
+	const listaDecultivos = cultivos
+
+
+	method positionCultivos(){
+		return listaDecultivos.cultivosSembrados()
+	}
 
 	method sembrar(cultivo) {
-	  cultivo.sembrar()
+	  game.addVisual(cultivo)
+	  cultivo.position(self.position())
+	  listaDecultivos.agregarCultivo(cultivo)
 	}
 
-	method regar(cultivo) {
-	  cultivo.regar()
-	}
+	method hayCulticoAca() {
+	  return self.positionCultivos().any({ self.position() == position.cultivo()})
+	}	
+
+
+	method regar() {
+		if(self.hayCulticoAca()){
+			
+
+
+		}
+	}	
+
+
+
+
 
 	method cocechar(cultivo) {
 	  cultivo.cocechar()
 	}
 
-	method verde(cultivo) {
-		ganancia += cultivo.valor()
+	method vender(cultivo) {
+		modedas.ganancias(cultivo.valor())
 	}
+}
+
+
+
+object cultivos {
+	const property cultivosSembrados = []
+
+	method agregarCultivo(newCultivo){
+		cultivosSembrados.add(newCultivo)
+	}
+  
+}
+
+object oro {
+  var property oroAcumulado = 0
+
+  method ganancias(masGanancias) {
+	oroAcumulado += masGanancias
+  } 
+}
+
+object granero {
+  var maizAlmacenado = 0
+  var tomacoAlmacenado = 0
+  var trigoAlmacenado = 0
+
+  method almacenarTrigo(cantAlmacenar) {
+	maizAlmacenado += cantAlmacenar
+  }
 }

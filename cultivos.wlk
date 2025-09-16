@@ -1,21 +1,21 @@
 import wollok.game.*
 
 class Maiz {
-	method position() {
-		// TODO: hacer que aparezca donde lo plante Hector
-		return game.at(1, 1)
-	}
+	var property position = game.at(1, 1)
+	const property valor = 5
+	
+
 	method image() {
 		// TODO: hacer que devuelva la imagen que corresponde
 		return "corn_baby.png"
 	}
+	
 }
 
 class Tomaco {
-	method position() {
-		// TODO: hacer que aparezca donde lo plante Hector
-		return game.at(3, 7)
-	}
+	var property position = game.at(3, 7)
+	const property valor = 5
+
 	method image() {
 		// TODO: hacer que devuelva la imagen que corresponde
 		return "tomaco_baby.png"
@@ -23,10 +23,9 @@ class Tomaco {
 }
 
 class Trigo {
-	method position() {
-		// TODO: hacer que aparezca donde lo plante Hector
-		return game.at(5, 6)
-	}
+	var property position = game.at(5, 6)
+	const property valor = 5
+
 	method image() {
 		// TODO: hacer que devuelva la imagen que corresponde
 		return "wheat_0.png"
