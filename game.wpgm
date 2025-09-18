@@ -16,6 +16,8 @@ program farmville {
 	keyboard.t().onPressDo({ => personaje.sembrarTrigo()})
 	keyboard.o().onPressDo({ => personaje.sembrarTomate()})
 	keyboard.r().onPressDo({ => personaje.regar()})
+	keyboard.v().onPressDo({ => personaje.vender()})
+	keyboard.c().onPressDo({ => personaje.cosechar()})
 	
 
 	//  VISUALES

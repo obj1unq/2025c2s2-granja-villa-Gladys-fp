@@ -5,7 +5,7 @@ import cultivos.*
 object personaje {
 	var property position = game.center()
 	const property image = "fplayer.png"
-	const property modedas = oro
+	const property monedas = oro
 	const cultivos = granja
 
 
@@ -64,12 +64,29 @@ object personaje {
 			self.cultivoAca().serRegado()
 		}
 	}	
+
+
+	method cosechar(){
+		if(not self.hayCultivoAca()){ 				// VERIFICA SI HAY UN CULTIVO EN LA POSICION ACTUAL
+			self.error("no tengo nada para cocechar")
+		}else{
+			self.cultivoAca().serCosechado()
+			cultivos.agregarCosecha(self.hayCultivoAca())
+		}	
+	}
+
+	method vender(){
+		cultivos.VenderTotalDeCosecha()
+		monedas.aculumarOro()
+		game.say(self, "vendi" + cultivos.VenderTotalDeCosecha() + "monedas")
+	}
 }
 
 
 
 object granja {
 	const property listaDeCultivos = []
+	const property listaDeCosechas = [] 
 
 	method agregarCultivo(newCultivo){		//agrega cultivos a la lista de la granja
 		listaDeCultivos.add(newCultivo)
@@ -87,6 +104,23 @@ object granja {
 		return self.listaDeCultivos().findOrDefault({cultivo => cultivo.position() == posicion}, null)		//return listaDeCultivos.filter({ cultivo => cultivo.position() == posicion })
         
     }  
+
+	method agregarCosecha(cosecha){
+		listaDeCosechas.add(cosecha)
+	}
+
+    method totalCosechasDe(cosecha) {	
+		return self.listaDeCosechas().findOrDefault({cultivo => cultivo == cosecha}, null)
+	}  
+
+	method oroOtenodoPor(cosecha){
+		return self.listaDeCosechas().sum({ cultivo => cultivo.valor()})
+	}
+
+	method VenderTotalDeCosecha(){
+		return self.oroOtenodoPor(Tomaco) + self.oroOtenodoPor(Maiz) + self.oroOtenodoPor(Trigo)
+
+	}
 }
 
 
