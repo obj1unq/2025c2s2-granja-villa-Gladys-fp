@@ -1,16 +1,34 @@
 import wollok.game.*
+import personaje.*
+
 
 class Maiz {
 	var property position = game.at(1, 1)
 	const property valor = 5
+	var estado = baby
 	
 
 	method image() {
 		// TODO: hacer que devuelva la imagen que corresponde
-		return "corn_baby.png"
+		return "corn_" + estado + ".png"
+	}
+
+	method serRegado(){
+	  return
 	}
 	
 }
+
+object baby {
+  
+}
+
+
+
+
+
+
+
 
 class Tomaco {
 	var property position = game.at(3, 7)

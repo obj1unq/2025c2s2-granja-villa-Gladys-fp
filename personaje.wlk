@@ -1,32 +1,38 @@
 import wollok.game.*
+import cultivos.*
+
 
 object personaje {
 	var property position = game.center()
 	const property image = "fplayer.png"
 	const property modedas = oro
-	const listaDecultivos = cultivos
+	const cultivosSembrados = cultivos
 
 
-	method positionCultivos(){
-		return listaDecultivos.cultivosSembrados()
+	method listaCultivosSembrados(){
+		return cultivosSembrados.listaDeCultivos()
 	}
 
 	method sembrar(cultivo) {
 	  game.addVisual(cultivo)
 	  cultivo.position(self.position())
-	  listaDecultivos.agregarCultivo(cultivo)
+	  cultivosSembrados.agregarCultivo(cultivo)
 	}
 
 	method hayCulticoAca() {
-	  return self.positionCultivos().any({ self.position() == position.cultivo()})
+	  return self.listaCultivosSembrados().any({ self.position() == position.cultivo()})
 	}	
+
+	method cultivoAca(){
+		return self.listaCultivosSembrados().find( {self.position() == position.cultivo()})
+	}
 
 
 	method regar() {
-		if(self.hayCulticoAca()){
-			
-
-
+		if(not self.hayCulticoAca()){
+			self.error("No hay un cultivo aca")
+		}else{
+			self.cultivoAca().serRegado()
 		}
 	}	
 
@@ -46,10 +52,10 @@ object personaje {
 
 
 object cultivos {
-	const property cultivosSembrados = []
+	const property listaDeCultivos = []
 
 	method agregarCultivo(newCultivo){
-		cultivosSembrados.add(newCultivo)
+		listaDeCultivos.add(newCultivo)
 	}
   
 }
