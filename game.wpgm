@@ -9,18 +9,19 @@ program farmville {
 	game.width(10)
 	game.ground("ground.png")
 
+	game.addVisualCharacter(personaje)
+
 	//MOVIMIENTOS
-	keyboard.m().onPressDo({personaje.sembrar(new Maiz())})
-	keyboard.t().onPressDo({personaje.sembrar(new Trigo())})
-	keyboard.o().onPressDo({personaje.sembrar(new Tomaco())})
-	keyboard.r().onPressDo({personaje.regar()})
+	keyboard.m().onPressDo({ => personaje.sembrarMaiz()})
+	keyboard.t().onPressDo({ => personaje.sembrarTrigo()})
+	keyboard.o().onPressDo({ => personaje.sembrarTomate()})
+	keyboard.r().onPressDo({ => personaje.regar()})
 	
 
 	//  VISUALES
- 	game.addVisualCharacter(personaje)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
+ 	/*game.addVisual(new Maiz()) // Se agrega a modo de prueba
  	game.addVisual(new Tomaco())
-	game.addVisual(new Trigo())
+	game.addVisual(new Trigo())*/
  	//  COMIENZA
 	
 	game.start()
