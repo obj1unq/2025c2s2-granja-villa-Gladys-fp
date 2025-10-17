@@ -1,6 +1,12 @@
 import wollok.game.*
 import personaje.*
 import cultivos.*
+import mercado.*
+import granja.*
+import aspersor.*
+
+
+
 
 program farmville {
 	//  CONFIG	
@@ -10,7 +16,8 @@ program farmville {
 	game.ground("ground.png")
 
 	game.addVisualCharacter(personaje)
-
+	game.addVisual(mercado2)
+	game.addVisual(mercado1)
 	//MOVIMIENTOS
 	keyboard.m().onPressDo({ => personaje.sembrarMaiz()})
 	keyboard.t().onPressDo({ => personaje.sembrarTrigo()})
@@ -18,13 +25,15 @@ program farmville {
 	keyboard.r().onPressDo({ => personaje.regar()})
 	keyboard.v().onPressDo({ => personaje.vender()})
 	keyboard.c().onPressDo({ => personaje.cosechar()})
-	
+	keyboard.space().onPressDo({ => personaje.informacionDeInventario()})
+	keyboard.a().onPressDo({ => personaje.colocarAspersor()})
 
-	//  VISUALES
- 	/*game.addVisual(new Maiz()) // Se agrega a modo de prueba
- 	game.addVisual(new Tomaco())
-	game.addVisual(new Trigo())*/
- 	//  COMIENZA
+	game.onCollideDo(mercado1,{ personaje => mercado1.comprarCultivosA(personaje)} )
+	game.onCollideDo(mercado2, { personaje => mercado2.comprarCultivosA(personaje) })
+
+
+
 	
+ 	//  COMIENZA
 	game.start()
 }

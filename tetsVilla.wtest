@@ -1,0 +1,86 @@
+import mercado.*
+import cultivos.*
+import aspersor.*
+import wollok.game.*
+import personaje.*
+
+
+describe "Sembrar, regar y cosechar Trigo" {
+  method initialize() {
+    personaje.sembrarTrigo()
+  }
+
+  test "sembrar trigo" {
+    assert.equals(1, personaje.cultivosSembrados().size())
+    assert.equals("a Trigo", personaje.cultivosSembrados().first().kindName())
+  }
+
+  test "regar trigo" {
+    personaje.regar()
+    assert.equals(trigoEtapa1, personaje.cultivosSembrados().first().estado())
+  }
+
+  test "cosechar trigo" {
+    personaje.regar()
+    personaje.regar()
+    personaje.cosechar()
+    assert.equals(1, personaje.cultivosCosechados().size())
+    assert.equals("a Trigo", personaje.cultivosCosechados().first().kindName())
+  }
+
+}
+
+
+
+describe "Sembrar, regar y cosechar Tomate" {
+  method initialize() {
+    personaje.sembrarTomate()
+  }
+
+  test "sembrar tomate" {
+    assert.equals(1, personaje.cultivosSembrados().size())
+    assert.equals("a Tomaco", personaje.cultivosSembrados().first().kindName())
+  }
+
+  test "regar tomate" {
+    personaje.regar()
+    assert.equals(tomateAdulto, personaje.cultivosSembrados().first().estado())
+  }
+
+  test "cosechar tomate" {
+    personaje.regar()
+    personaje.moverArriba()
+    personaje.cosechar()
+    assert.equals(1, personaje.cultivosCosechados().size())
+    assert.equals("a Tomaco", personaje.cultivosCosechados().first().kindName())
+
+  }
+
+}
+
+
+
+describe "Sembrar, regar y cosechar Maiz" {
+  method initialize() {
+    personaje.sembrarMaiz()
+  }
+
+  test "sembrar maiz" {
+    assert.equals(1, personaje.cultivosSembrados().size())
+    assert.equals("a Maiz", personaje.cultivosSembrados().first().kindName())
+  }
+
+  test "regar maiz" {
+    personaje.regar()
+    assert.equals(adulto, personaje.cultivosSembrados().first().estado())
+  }
+  
+  test "cosechar maiz" {
+    personaje.regar()
+    personaje.cosechar()
+    assert.equals(1, personaje.cultivosCosechados().size())
+    assert.equals("a Maiz", personaje.cultivosCosechados().first().kindName())
+  }
+
+}
+
